@@ -17,8 +17,8 @@ class credential:
 creds = {}
 
 creds["default"] = credential("default", "openskyapi", "", "")
-if path.isfile("_credentials.py"):
-    with open("_credentials.py", "r") as fp1:
+if path.isfile("credentials.json"):
+    with open("credentials.json", "r") as fp1:
         for ii in load(fp1):
             creds[ii[0]] = credential(*ii)
 
