@@ -68,7 +68,11 @@ specialFields = {ii: {} for ii in outerfields}
 # Proxy & SSL handling
 useProxy = False
 commonProxy = "http://proxy.ext.ray.com:80" if useProxy else None
-proxydict = ({"http": commonProxy, "https": commonProxy, "ftp": commonProxy} if useProxy else None )
+proxydict = (
+    {"http": commonProxy, "https": commonProxy, "ftp": commonProxy}
+    if useProxy
+    else None
+)
 SSLverify = True
 print("Proxy: {}   SSL Verif: {} ".format(proxydict, SSLverify))
 
@@ -261,7 +265,7 @@ finally:
                 int(time.time()),
                 "CLOSED",
                 0,
-                '{"totalTime":{},"lastTime":{},"stateReports":{},"unique":{}}'.format(
+                '{{"totalTime":{},"lastTime":{},"stateReports":{},"unique":{}}}'.format(
                     lastTime - firstTime,
                     lastTime,
                     stateReports,

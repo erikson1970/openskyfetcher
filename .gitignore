@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # shadow credential file
+*.adsb
 credentials.json
