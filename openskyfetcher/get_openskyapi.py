@@ -1,13 +1,13 @@
 import base64
-import openskyapi
 from gzip import compress
 from base64 import b64encode
 from json import dumps
 import time
 from datetime import datetime
-from struct import pack, unpack
+from struct import pack
 import traceback
 import credentials
+import openskyapi
 
 # datetime object containing current date and time
 now = datetime.now()
