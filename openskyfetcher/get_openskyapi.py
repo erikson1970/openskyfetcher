@@ -67,23 +67,37 @@ specialFields = {ii: {} for ii in outerfields}
 
 # Proxy & SSL handling
 useProxy = False
-commonProxy = "http://proxy.ext.ray.com:80" if useProxy else None
-proxydict = (
-    {"http": commonProxy, "https": commonProxy, "ftp": commonProxy}
-    if useProxy
-    else None
-)
+proxydict = None
+if useProxy:
+    commonProxy = (
+        credentials.creds["commonProxy"].hostname
+        if "commonProxy" in credentials.creds
+        else None
+    )
+    proxydict = (
+        {"http": commonProxy, "https": commonProxy, "ftp": commonProxy}
+        if not commonProxy is None
+        else {
+            "http": credentials.creds["httpProxy"].hostname
+            if "httpProxy" in credentials.creds
+            else None,
+            "https": credentials.creds["httpsProxy"].hostname
+            if "httpsProxy" in credentials.creds
+            else None,
+            "ftp": credentials.creds["ftpProxy"].hostname
+            if "ftpProxy" in credentials.creds
+            else None,
+        }
+    )
 SSLverify = True
 print("Proxy: {}   SSL Verif: {} ".format(proxydict, SSLverify))
 
 #
 credID = "myAPIkey" if "myAPIkey" in credentials.creds else "default"
-for k, v in credentials.creds.items():
-    print(k, v)
 
 api = openskyapi.OpenSkyApi(
-    username=credentials.creds["myAPIkey"].username,
-    password=credentials.creds["myAPIkey"].password,
+    username=credentials.creds[credID].username,
+    password=credentials.creds[credID].password,
     proxyDict=proxydict,
     verify=SSLverify,
 )
