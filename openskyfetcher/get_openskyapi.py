@@ -89,7 +89,7 @@ if useProxy:
             else None,
         }
     )
-SSLverify = True
+SSLverify = credentials.creds["SSLverify"].hostname if "SSLverify" in credentials.creds else True
 print("Proxy: {}   SSL Verif: {} ".format(proxydict, SSLverify))
 
 #
